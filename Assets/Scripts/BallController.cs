@@ -48,5 +48,6 @@ public class BallController : MonoBehaviour
         transform.parent = ballAnchor;
         transform.localPosition = Vector3.zero;
         ballRB.isKinematic = true;
+        launchIndicator.transform.position = new Vector3(ballAnchor.transform.position.x, ballAnchor.transform.position.y, ballAnchor.transform.position.z + 1f);
     }
 }

@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform pinAnchor;
     [SerializeField] private InputManager inputManager;
 
+    private GameObject pinObjects;
+
 
     private void Start()
     {
@@ -27,15 +29,15 @@ public class GameManager : MonoBehaviour
 
     private void SetPins()
     {
-        if (pinCollection)
-            foreach (Transform child in pinCollection.transform)
+        if (pinObjects)
+            foreach (Transform child in pinObjects.transform)
             {
                 Destroy(child.gameObject);
             }
 
-        Destroy(pinCollection);
+        Destroy(pinObjects);
 
-        pinCollection = Instantiate(pinCollection, pinAnchor.transform.position, Quaternion.identity, transform);
+        pinObjects = Instantiate(pinCollection, pinAnchor.transform.position, Quaternion.identity, transform);
 
         pins = FindObjectsByType<FallTrigger>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
@@ -43,7 +45,6 @@ public class GameManager : MonoBehaviour
             pin.OnPinFall.AddListener(IncrementScore);
 
     }
-
 
 
     private void IncrementScore()
